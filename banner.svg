@@ -1,1 +1,429 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Banner – Muhammadbilol Qo'chqorov</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d1117;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Fira Code', monospace;
+  }
+
+  .banner {
+    width: 900px;
+    min-height: 220px;
+    background: linear-gradient(135deg, #0d1f1a 0%, #0a1628 50%, #0d1f1a 100%);
+    border: 1px solid #1a3a2a;
+    border-radius: 12px;
+    padding: 28px 32px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Grid background */
+  .banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,120,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,120,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    animation: gridShift 20s linear infinite;
+  }
+
+  @keyframes gridShift {
+    0%   { background-position: 0 0; }
+    100% { background-position: 40px 40px; }
+  }
+
+  /* Corner glow */
+  .banner::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(0,255,120,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.2); }
+  }
+
+  /* ── Top line ── */
+  .top-line {
+    font-family: 'Fira Code', monospace;
+    color: #4ade80;
+    font-size: 13px;
+    margin-bottom: 6px;
+    opacity: 0;
+    animation: fadeSlideDown 0.6s ease forwards 0.1s;
+  }
+
+  /* ── Name ── */
+  .name-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+    opacity: 0;
+    animation: fadeSlideDown 0.6s ease forwards 0.3s;
+  }
+
+  .name-first {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: #e6edf3;
+    letter-spacing: -0.5px;
+  }
+
+  .name-last {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    color: #4ade80;
+    letter-spacing: -0.5px;
+  }
+
+  /* ── Open to work badge ── */
+  .badge-work {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1.5px solid #4ade80;
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: #4ade80;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeSlideDown 0.6s ease forwards 0.5s;
+  }
+
+  .badge-dot {
+    width: 8px; height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    animation: blink 1.5s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.5); }
+    50%       { opacity: 0.6; box-shadow: 0 0 0 5px rgba(74,222,128,0); }
+  }
+
+  /* ── Handle & role ── */
+  .handle {
+    font-size: 12px;
+    color: #8b949e;
+    margin-bottom: 2px;
+    opacity: 0;
+    animation: fadeSlideDown 0.6s ease forwards 0.4s;
+  }
+
+  .role {
+    font-size: 13px;
+    color: #4ade80;
+    font-weight: 600;
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: fadeSlideDown 0.6s ease forwards 0.5s;
+  }
+
+  /* ── Description ── */
+  .desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #c9d1d9;
+    line-height: 1.7;
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: fadeSlideDown 0.6s ease forwards 0.6s;
+  }
+
+  .desc .hl { color: #fbbf24; font-weight: 600; }
+  .desc .hl2 { color: #c9d1d9; }
+
+  /* ── Tech tags ── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeSlideDown 0.6s ease forwards 0.7s;
+  }
+
+  .tag {
+    font-family: 'Fira Code', monospace;
+    font-size: 11px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    border: 1px solid;
+    cursor: default;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .tag:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+
+  .tag-blue   { color: #60a5fa; border-color: #60a5fa44; background: #60a5fa11; }
+  .tag-green  { color: #4ade80; border-color: #4ade8044; background: #4ade8011; }
+  .tag-yellow { color: #fbbf24; border-color: #fbbf2444; background: #fbbf2411; }
+  .tag-gray   { color: #9ca3af; border-color: #9ca3af44; background: #9ca3af11; }
+  .tag-red    { color: #f87171; border-color: #f8717144; background: #f8717111; }
+  .tag-teal   { color: #2dd4bf; border-color: #2dd4bf44; background: #2dd4bf11; }
+  .tag-purple { color: #a78bfa; border-color: #a78bfa44; background: #a78bfa11; }
+  .tag-orange { color: #fb923c; border-color: #fb923c44; background: #fb923c11; }
+
+  /* ── Footer ── */
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #1a3a2a;
+    padding-top: 16px;
+    opacity: 0;
+    animation: fadeSlideDown 0.6s ease forwards 0.9s;
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .link-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #8b949e;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .link-item:hover { color: #4ade80; }
+
+  .link-icon { font-size: 13px; }
+
+  .location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #8b949e;
+    margin-top: 6px;
+  }
+
+  /* ── Stats (repos olib tashlandi) ── */
+  .stats {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .stat {
+    text-align: right;
+  }
+
+  .stat-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    color: #8b949e;
+    margin-top: 2px;
+  }
+
+  .stat-comment {
+    font-family: 'Fira Code', monospace;
+    font-size: 10px;
+    color: #3d5a4a;
+    margin-top: 1px;
+  }
+
+  .stat-blue   { color: #60a5fa; }
+  .stat-purple { color: #a78bfa; }
+
+  /* ── Floating particles ── */
+  .particle {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: #4ade80;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes float {
+    0%   { transform: translateY(0) translateX(0); opacity: 0; }
+    10%  { opacity: 0.6; }
+    90%  { opacity: 0.3; }
+    100% { transform: translateY(-120px) translateX(30px); opacity: 0; }
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Typing cursor blink */
+  .cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background: #4ade80;
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: cursorBlink 1s step-end infinite;
+  }
+
+  @keyframes cursorBlink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  .left-col { flex: 1; }
+</style>
+</head>
+<body>
+
+<div class="banner" id="banner">
+
+  <!-- Particles -->
+  <div class="particle" style="left:10%; animation-duration:8s; animation-delay:0s;"></div>
+  <div class="particle" style="left:25%; animation-duration:6s; animation-delay:2s;"></div>
+  <div class="particle" style="left:45%; animation-duration:9s; animation-delay:1s;"></div>
+  <div class="particle" style="left:65%; animation-duration:7s; animation-delay:3s;"></div>
+  <div class="particle" style="left:80%; animation-duration:5s; animation-delay:0.5s;"></div>
+
+  <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+    <div class="left-col">
+
+      <div class="top-line">&gt; hello_world.init()<span class="cursor"></span></div>
+
+      <div class="name-row">
+        <span class="name-first">Muhammadbilol</span>
+        <span class="name-last">Qo'chqorov</span>
+        <div class="badge-work">
+          <span class="badge-dot"></span>
+          Open to work
+        </div>
+      </div>
+
+      <div class="handle">@mbiloldev &nbsp;·&nbsp; he/him</div>
+      <div class="role">Full-Stack Developer &amp; IT Mentor</div>
+
+      <div class="desc">
+        Full-Stack Developer &nbsp;•&nbsp;
+        <span class="hl">Python/Django, JS, C++/C#</span>
+        &nbsp;•&nbsp; <span class="hl2">Telegram Bots &amp; Web Apps</span><br>
+        <span style="color:#4ade80; font-weight:600;">IT Mentor</span>
+        since 2023 — Transforming code into solutions 🚀
+      </div>
+
+      <div class="tags">
+        <span class="tag tag-blue">Python</span>
+        <span class="tag tag-green">Django</span>
+        <span class="tag tag-yellow">JavaScript</span>
+        <span class="tag tag-gray">PHP</span>
+        <span class="tag tag-gray">C#</span>
+        <span class="tag tag-red">C++</span>
+        <span class="tag tag-teal">Tailwind CSS</span>
+        <span class="tag tag-purple">Telegram Bots</span>
+        <span class="tag tag-orange">HTML5</span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>
+      <div class="links">
+        <a class="link-item" href="#">
+          <span class="link-icon">○</span> github.com/mbiloldev
+        </a>
+        <a class="link-item" href="#">
+          <span class="link-icon">→</span> t.me/IT_MENTOR_UZ
+        </a>
+        <a class="link-item" href="#">
+          <span class="link-icon">✉</span> mblabx@gmail.com
+        </a>
+      </div>
+      <div class="location">
+        <span>📍</span> Uzbekistan, Tashkent
+      </div>
+    </div>
+
+    <!-- repos olib tashlandi, faqat 2 stat qoldi -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num stat-blue">2023</div>
+        <div class="stat-label">// mentor</div>
+        <div class="stat-comment">// since</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num stat-purple">∞</div>
+        <div class="stat-label">// ideas</div>
+        <div class="stat-comment">// Stack Developer</div>
+        <div class="stat-comment">// Tashkent</div>
+        <div class="stat-comment">// UTC +05:00</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Tag hover sound-like ripple effect
+  document.querySelectorAll('.tag').forEach(tag => {
+    tag.addEventListener('mouseenter', function() {
+      this.style.transition = 'transform 0.15s, box-shadow 0.15s';
+    });
+  });
+
+  // Particle spawner — dinamik zarralar
+  const banner = document.getElementById('banner');
+  function spawnParticle() {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.bottom = '0';
+    p.style.animationDuration = (4 + Math.random() * 6) + 's';
+    p.style.animationDelay = '0s';
+    p.style.opacity = '0';
+    banner.appendChild(p);
+    setTimeout(() => p.remove(), 10000);
+  }
+  setInterval(spawnParticle, 800);
+</script>
+
+</body>
+</html>
