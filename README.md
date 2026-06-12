@@ -2,6 +2,12 @@
 
 ChatGPT'ga o'xshash, lekin **bepul** va **ochiq kodli** AI chat ilovasi. Google Gemini API asosida ishlaydi.
 
+## Loyiha egasi !
+
+<div align="center">
+  <img src="./banner.svg" width="100%"/>
+</div>
+
 ---
 
 ## ✨ Xususiyatlar
